@@ -1,2 +1,0 @@
-Contador de Palavras.
-Quantas palavras o contador de palavras conta.
