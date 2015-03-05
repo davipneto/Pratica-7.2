@@ -24,7 +24,8 @@ public class Pratica72 {
         System.out.println("Digite o caminho do arquivo: ");
         String arquivo = scanner.nextLine();
         ContadorPalavras cp = new ContadorPalavras(arquivo);
-        cp.escrever(cp.getPalavras());
+        Map<String,Integer> palavras = (cp.getPalavras());
+        cp.escrever(palavras);
     }
     
 }
