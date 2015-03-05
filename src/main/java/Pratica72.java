@@ -23,9 +23,23 @@ public class Pratica72 {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o caminho do arquivo: ");
         String arquivo = scanner.nextLine();
-        ContadorPalavras cp = new ContadorPalavras(arquivo);
-        Map<String,Integer> palavras = (cp.getPalavras());
-        cp.escrever(palavras);
+        ContadorPalavras cp = null;
+        try{
+            cp = new ContadorPalavras(arquivo);
+        } catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        Map<String,Integer> palavras = null;
+        try{
+            palavras = (cp.getPalavras());
+        }catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
+        try{
+            cp.escrever(palavras);
+        } catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
     
 }
