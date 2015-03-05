@@ -26,32 +26,45 @@ public class ContadorPalavras {
     private BufferedWriter writer;
     
     public ContadorPalavras(String caminho) throws FileNotFoundException, IOException{
-        reader = new BufferedReader(new FileReader(new File(caminho)));
-        writer = new BufferedWriter(new FileWriter(new File(caminho + ".out")));
+        try{
+            reader = new BufferedReader(new FileReader(new File(caminho)));
+            writer = new BufferedWriter(new FileWriter(new File(caminho + ".out")));
+        } catch(IOException e){
+            System.out.println(e.getLocalizedMessage());
+        }
     }
     
     public Map<String,Integer> getPalavras() throws IOException{
         Map<String,Integer> mapa = new HashMap<>();
-        String leitura = reader.readLine(), palavra = "";
-        while(leitura != null){
-            for(int i=0; i<leitura.length(); i++){
-                if(Character.isAlphabetic(leitura.charAt(i))){
-                    palavra += leitura.charAt(i);
-                }
-                else if(palavra != ""){
-                    palavra = palavra.toLowerCase();
-                    if(mapa.containsKey(palavra)){
-                        mapa.replace(palavra, mapa.get(palavra)+1);
+        try {
+            String leitura = reader.readLine(), palavra = "";
+            while(leitura != null){
+                for(int i=0; i<leitura.length(); i++){
+                    if(Character.isAlphabetic(leitura.charAt(i))){
+                        palavra += leitura.charAt(i);
                     }
-                    else{
-                        mapa.put(palavra, 1);
+                    else if(palavra != ""){
+                        palavra = palavra.toLowerCase();
+                        if(mapa.containsKey(palavra)){
+                            mapa.replace(palavra, mapa.get(palavra)+1);
+                        }
+                        else{
+                            mapa.put(palavra, 1);
+                        }
+                        palavra = "";
                     }
-                    palavra = "";
                 }
+                leitura = reader.readLine();
             }
-            leitura = reader.readLine();
+        } catch(IOException e){
+            System.out.println(e.getLocalizedMessage());
+        } finally {
+            try {
+            reader.close();
+            } catch(Exception e){
+                System.out.println(e.getLocalizedMessage());
+            }
         }
-        reader.close();
         return mapa;
     }
     

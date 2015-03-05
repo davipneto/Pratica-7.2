@@ -24,22 +24,10 @@ public class Pratica72 {
         System.out.println("Digite o caminho do arquivo: ");
         String arquivo = scanner.nextLine();
         ContadorPalavras cp = null;
-        try{
-            cp = new ContadorPalavras(arquivo);
-        } catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
-        }
+        cp = new ContadorPalavras(arquivo);
         Map<String,Integer> palavras = null;
-        try{
-            palavras = (cp.getPalavras());
-        }catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
-        }
-        try{
-            cp.escrever(palavras);
-        } catch(Exception e){
-            System.out.println(e.getLocalizedMessage());
-        }
+        palavras = (cp.getPalavras());
+        cp.escrever(palavras);
     }
     
 }
